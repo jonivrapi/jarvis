@@ -1,4 +1,4 @@
-#!/Users/jonivrapi/src/jarvis/bin/python3.10
+#!/Users/vrapij/source/jarvis/bin/python3.10
 # -*- coding: utf-8 -*-
 import re
 import sys

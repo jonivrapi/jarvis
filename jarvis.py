@@ -30,6 +30,11 @@ def set_hotkey():
         on_release=for_canonical(hotkey.release)
     ) as l:
         l.join()
+
+
+@cli.command()
+def say_hi():
+    print('Hi!')
     
 
 def on_activate():
