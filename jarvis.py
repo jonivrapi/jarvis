@@ -45,10 +45,12 @@ def speak():
     # Function to convert text to
     # speech
     def SpeakText(command):
+        voiceID = "com.apple.voice.compact.en-GB.Daniel"
+        engine = pyttsx3.init('nsss')
         
-        # Initialize the engine
-        engine = pyttsx3.init()
+        engine.setProperty('voice', voiceID)
         engine.say(command)
+
         engine.runAndWait()
         
         
