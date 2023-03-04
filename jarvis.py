@@ -1,6 +1,8 @@
 from pynput import keyboard
 import os
 import click
+import speech_recognition as sr
+import pyttsx3
 
 CONTEXT_SETTINGS = dict(help_option_names=['-h', '--help'])
 
@@ -21,7 +23,7 @@ def set_hotkey():
     def for_canonical(f):
         return lambda k: f(l.canonical(k))
     
-    shortcut = keyboard.HotKey.parse('<cmd>+`')
+    shortcut = keyboard.HotKey.parse('<cmd>+1')
     
     hotkey = keyboard.HotKey(shortcut, on_activate)
     
@@ -35,6 +37,64 @@ def set_hotkey():
 @cli.command()
 def say_hi():
     print('Hi!')
+
+@cli.command()
+def speak():
+    r = sr.Recognizer()
+ 
+    # Function to convert text to
+    # speech
+    def SpeakText(command):
+        
+        # Initialize the engine
+        engine = pyttsx3.init()
+        engine.say(command)
+        engine.runAndWait()
+        
+        
+    # Loop infinitely for user to
+    # speak
+    
+    while(1):   
+        
+        # Exception handling to handle
+        # exceptions at the runtime
+        try:
+            
+            # use the microphone as source for input.
+            with sr.Microphone() as source2:
+                
+                # wait for a second to let the recognizer
+                # adjust the energy threshold based on
+                # the surrounding noise level
+                r.adjust_for_ambient_noise(source2, duration=0.2)
+                
+                #listens for the user's input
+                audio2 = r.listen(source2)
+                
+                # Using google to recognize audio
+                MyText = r.recognize_google(audio2)
+                MyText = MyText.lower()
+
+                if 'jarvis' in MyText:
+                    print("How can I help you sir?")
+                    SpeakText("How can I help you sir?")
+
+                if 'terminal' in MyText:
+                    set_hotkey()
+                    SpeakText("I have set your terminal hotkey?")
+
+                if 'open chrome' in MyText:
+                    os.system("open -a /Applications/Google\ Chrome.app")
+    
+                # print("Did you say ",MyText)
+                # SpeakText(MyText)
+                
+        except sr.RequestError as e:
+            print("Could not request results; {0}".format(e))
+            
+        except sr.UnknownValueError:
+            print("unknown error occurred")
     
 
 def on_activate():
