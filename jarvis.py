@@ -83,7 +83,7 @@ def speak():
                     SpeakText("How can I help you sir?")
 
                 if 'terminal' in MyText:
-                    set_hotkey()
+                    on_activate()
                     SpeakText("I have set your terminal hotkey?")
 
                 if 'open chrome' in MyText:
