@@ -79,12 +79,14 @@ def speak():
                 MyText = MyText.lower()
 
                 if 'jarvis' in MyText:
-                    print("How can I help you sir?")
                     SpeakText("How can I help you sir?")
 
                 if 'terminal' in MyText:
                     set_hotkey()
                     SpeakText("I have set your terminal hotkey?")
+
+                if 'elizabeth' in MyText:
+                    SpeakText("You are very attractive")
 
                 if 'open chrome' in MyText:
                     os.system("open -a /Applications/Google\ Chrome.app")
